@@ -28,8 +28,11 @@ while True:
     if "result" in updates and len(updates["result"]) > 0:
         last_update_id = t.get_last_update_id(updates) + 1
         text, id, person_id = t.get_last_chat_id_and_text(updates)
-        answer = a.find_answer(text)
-        t.send_message(answer, id)
-        log(date_time + "\n" + str(person_id) + ":" + getName(person_id) + ": \"" + text +"\" " + ".\nBOT REPLIED: \"" + answer + "\" \n")
+        if len(text) > 0:
+            answer = a.find_answer(text)
+            t.send_message(answer, id)
+            log("\n"+date_time + "\n" + str(person_id) + ":" + getName(person_id) + ": \"" + text +"\" ")
+            if len(answer) > 0:
+                log("BOT REPLIED: \"" + answer + "\"")
     time.sleep(0.5)
 
